@@ -1,0 +1,16 @@
+application: memorizingwords
+version: dev
+runtime: python27
+threadsafe: true
+api_version: 1
+
+handlers:
+# Endpoints handler
+- url: /_ah/spi/.*
+  script: helloworld_api.APPLICATION
+
+libraries:
+- name: pycrypto
+  version: latest
+- name: endpoints
+  version: 1.0
