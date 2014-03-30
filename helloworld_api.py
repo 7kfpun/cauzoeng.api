@@ -1,22 +1,13 @@
 # -*- coding: utf-8 -*-
 import endpoints
+from datetime import datetime, timedelta
 from protorpc import messages
 from protorpc import message_types
 from protorpc import remote
-from models import Greeting, GreetingCollection
+from models import Greeting, GreetingCollection, STORED_GREETINGS
 
 
 package = 'Hello'
-
-
-STORED_GREETINGS = GreetingCollection(items=[
-    Greeting(message='hello world!', subject="HAHA",
-             description="this is the 1st lucky draw!"),
-    Greeting(message='goodbye world!', subject="HAHA",
-             description="this is the 2nd lucky draw!"),
-    Greeting(message='goodbye again world!', subject="WAWA",
-             description="this is the 3rd lucky draw!"),
-])
 
 
 @endpoints.api(name='helloworld', version='v1')
