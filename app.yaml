@@ -1,4 +1,4 @@
-application: memorizingwords
+application: cauzoeng
 version: dev
 runtime: python27
 threadsafe: true
