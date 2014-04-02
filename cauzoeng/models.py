@@ -6,6 +6,9 @@ from google.appengine.ext import ndb
 class Lottery(EndpointsModel):
     """ Lottery models."""
 
+    _message_fields_schema = (
+        'id', 'title', 'subject', 'description', 'url', 'created', 'finished')
+
     title = ndb.StringProperty()
     subject = ndb.StringProperty()
     description = ndb.StringProperty()
@@ -16,6 +19,8 @@ class Lottery(EndpointsModel):
 
 class Bet(EndpointsModel):
     """ Bet models."""
+
+    _message_fields_schema = ('id', 'user', 'lottery', 'created')
 
     user = ndb.StringProperty(required=True)
     lottery = ndb.StringProperty(required=True)

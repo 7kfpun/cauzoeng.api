@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import endpoints
+import logging
 from protorpc import remote
 from models import Bet, Lottery
 
 
+logger = logging.getLogger(__name__)
 package = 'cauzoeng'
 
 
