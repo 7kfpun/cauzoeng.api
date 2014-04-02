@@ -15,7 +15,9 @@ class LotteryApi(remote.Service):
         lottery.put()
         return lottery
 
-    @Lottery.query_method(path='lottery', name='lottery.list')
+    @Lottery.query_method(
+        query_fields=('limit', 'order', 'pageToken'),
+        path='lottery', name='lottery.list')
     def LotteryList(self, query):
         return query
 
