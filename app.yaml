@@ -7,7 +7,7 @@ api_version: 1
 handlers:
 # Endpoints handler
 - url: /_ah/spi/.*
-  script: helloworld_api.APPLICATION
+  script: cauzoeng.api.APPLICATION
 
 libraries:
 - name: pycrypto
