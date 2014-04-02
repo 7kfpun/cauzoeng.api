@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import endpoints
 from protorpc import remote
-from models import Lottery
+from models import Bet, Lottery
 
 
 package = 'cauzoeng'
@@ -19,6 +19,15 @@ class LotteryApi(remote.Service):
         query_fields=('limit', 'order', 'pageToken'),
         path='lottery', name='lottery.list')
     def LotteryList(self, query):
+        return query
+
+    @Bet.method(path='bet', http_method='POST', name='bet.insert')
+    def BetInsert(self, bet):
+        bet.put()
+        return bet
+
+    @Bet.query_method(path='bet', name='bet.list')
+    def BetList(self, query):
         return query
 
 
