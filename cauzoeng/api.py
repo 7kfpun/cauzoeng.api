@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import endpoints
 import logging
+from datetime import datetime, timedelta
 from protorpc import remote
-from models import Bet, Lottery
+from models import Bet, Lottery, User
 
 
 logger = logging.getLogger(__name__)
@@ -39,12 +40,30 @@ class LotteryApi(remote.Service):
 
     @Bet.method(path='bet', http_method='POST', name='bet.insert')
     def BetInsert(self, bet):
+        logger.info(bet)
+        if not Lottery.get_by_id(long(bet.lottery)):
+            raise endpoints.NotFoundException('not found.')
+
+        last_bet = Bet.query(
+            Bet.user == bet.user, Bet.lottery == bet.lottery
+        ).order(-Bet.created).get()
+        logger.info(last_bet)
+        if datetime.now() - last_bet.created < timedelta(hours=2):
+            logger.info(datetime.now() - last_bet.created)
+            raise endpoints.BadRequestException(
+                str((datetime.now() - last_bet.created).seconds))
+
         bet.put()
         return bet
 
     @Bet.query_method(path='bet', name='bet.list')
     def BetList(self, query):
         return query
+
+    @User.method(path='user', http_method='POST', name='user.insert')
+    def UserInsert(self, user):
+        user.put()
+        return user
 
 
 APPLICATION = endpoints.api_server([LotteryApi])

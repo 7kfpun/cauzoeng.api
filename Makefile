@@ -90,3 +90,14 @@ lupdate: extract_locale update_locale compile_locale
 clean:
 	rm -f *.py[co] *.orig
 	rm -f */*.py[co] */*.orig
+
+# target: generate_docs - Generate document files
+.PHONY: generate_docs
+generate_docs:
+	mkdir -p docs
+	$(GAE)/endpointscfg.py get_discovery_doc cauzoeng.api.LotteryApi -o docs
+
+# target: generate_client - Generate android client library
+.PHONY: generate_client
+generate_client:
+	$(GAE)/endpointscfg.py get_client_lib java cauzoeng.api.LotteryApi
