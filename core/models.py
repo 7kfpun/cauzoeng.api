@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from ccy import currencydb
 from endpoints_proto_datastore.ndb import EndpointsModel
 from google.appengine.ext import ndb
+import ccy
 import logging
 
 
@@ -35,7 +35,7 @@ class Item(EndpointsModel):
 
     title = ndb.StringProperty(required=True)
     price = ndb.FloatProperty(required=True)
-    currency = ndb.StringProperty(required=True, choices=currencydb().keys())
+    currency = ndb.StringProperty(required=True, choices=ccy.all())
     description = ndb.StringProperty(required=True)
     second_hand = ndb.BooleanProperty(required=True)
     condition = ndb.StringProperty(choices=[
